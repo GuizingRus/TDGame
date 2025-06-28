@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3bvvr4cudaws"]
+
+[ext_resource type="Texture2D" uid="uid://gydq1rtfy50l" path="res://tower-defense-top-down/PNG/Default size/towerDefense_tile246.png" id="1_nvasq"]
+[ext_resource type="Script" path="res://Mobs/soldier_b.gd" id="1_qoh20"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlrkp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyman"]
+bg_color = Color(0.937255, 0, 0.00784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnl86"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_b52pd"]
+script/source = "extends ProgressBar
+
+
+func _ready():
+	self.max_value = get_parent().Health
+	
+func _process(_delta):
+	self.value = get_parent().Health
+"
+
+[node name="soldier b" type="CharacterBody2D"]
+script = ExtResource("1_qoh20")
+
+[node name="TowerDefenseTile246" type="Sprite2D" parent="."]
+texture = ExtResource("1_nvasq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vlrkp")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -21.0
+offset_top = -27.0
+offset_right = 22.0
+offset_bottom = -21.0
+theme_override_styles/background = SubResource("StyleBoxFlat_kyman")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rnl86")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+script = SubResource("GDScript_b52pd")
